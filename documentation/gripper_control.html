@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="nl" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Epick Gripper Control Applications &mdash; Robotiq Gripper 0.1 documentatie</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=a57088fb"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/translations.js?v=e4d38c6a"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Zoeken" href="../search.html" />
+    <link rel="prev" title="Installatie van de Robotiq package" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Robotiq Gripper
+              <img src="../_static/avans-hogeschool.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Zoek in documentatie" aria-label="Zoek in documentatie" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigatiemenu">
+              <p class="caption" role="heading"><span class="caption-text">Inhoudsopgave:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Inleiding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installatie van de Robotiq package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html#urdf-virtuele-gripper">URDF(virtuele gripper)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html#starten-controller">Starten Controller</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Epick Gripper Control Applications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basic-commands">Basic Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-options">Advanced Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#help">Help</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#command-line-arguments">Command Line Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exit-codes">Exit Codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python-api">Python API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gui-application">GUI Application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#launch-gui">Launch GUI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gui-features">GUI Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gui-screenshot">GUI Screenshot</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Navigatiemenu voor mobiel" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Robotiq Gripper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Paginanavigatie">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Epick Gripper Control Applications</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/documentation/gripper_control.md.txt" rel="nofollow"> Bekijk paginabron</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="epick-gripper-control-applications">
+<h1>Epick Gripper Control Applications<a class="headerlink" href="#epick-gripper-control-applications" title="Link to this heading"></a></h1>
+<p>Python applications for controlling the Epick gripper via ROS2 action interface, including both command-line and GUI tools.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">epick_gripper_control</span></code> command provides a simple interface to control the gripper:</p>
+<section id="basic-commands">
+<h3>Basic Commands<a class="headerlink" href="#basic-commands" title="Link to this heading"></a></h3>
+<p><strong>Grip an object:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epick_gripper_control<span class="w"> </span>grip
+</pre></div>
+</div>
+<p><strong>Release an object:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epick_gripper_control<span class="w"> </span>release
+</pre></div>
+</div>
+<p><strong>Send custom position (0.0 = release, 1.0 = grip):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epick_gripper_control<span class="w"> </span>position<span class="w"> </span><span class="m">1</span>.0
+epick_gripper_control<span class="w"> </span>position<span class="w"> </span><span class="m">0</span>.5
+epick_gripper_control<span class="w"> </span>position<span class="w"> </span><span class="m">0</span>.0
+</pre></div>
+</div>
+</section>
+<section id="advanced-options">
+<h3>Advanced Options<a class="headerlink" href="#advanced-options" title="Link to this heading"></a></h3>
+<p><strong>Send command without waiting for completion:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epick_gripper_control<span class="w"> </span>grip<span class="w"> </span>--no-wait
+</pre></div>
+</div>
+<p><strong>Set custom timeout (default: 10 seconds):</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epick_gripper_control<span class="w"> </span>grip<span class="w"> </span>--timeout<span class="w"> </span><span class="m">5</span>.0
+</pre></div>
+</div>
+<p><strong>Use custom action server name:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epick_gripper_control<span class="w"> </span>grip<span class="w"> </span>--action-name<span class="w"> </span>/my_gripper/gripper_cmd
+</pre></div>
+</div>
+</section>
+<section id="help">
+<h3>Help<a class="headerlink" href="#help" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epick_gripper_control<span class="w"> </span>--help
+</pre></div>
+</div>
+</section>
+</section>
+<section id="command-line-arguments">
+<h2>Command Line Arguments<a class="headerlink" href="#command-line-arguments" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">command</span></code>: Required. One of: <code class="docutils literal notranslate"><span class="pre">grip</span></code>, <code class="docutils literal notranslate"><span class="pre">release</span></code>, <code class="docutils literal notranslate"><span class="pre">position</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: Required for <code class="docutils literal notranslate"><span class="pre">position</span></code> command. Position value between 0.0 and 1.0</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--action-name</span></code>: Optional. Action server name (default: <code class="docutils literal notranslate"><span class="pre">/epick_gripper_action_controller/gripper_cmd</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--no-wait</span></code>: Optional. Don’t wait for goal completion</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--timeout</span></code>: Optional. Timeout in seconds (default: 10.0)</p></li>
+</ul>
+</section>
+<section id="exit-codes">
+<h2>Exit Codes<a class="headerlink" href="#exit-codes" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code>: Success</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code>: Command failed</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">130</span></code>: Interrupted by user (Ctrl+C)</p></li>
+</ul>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simple grip and release</span>
+epick_gripper_control<span class="w"> </span>grip
+epick_gripper_control<span class="w"> </span>release
+
+<span class="c1"># Quick commands without waiting</span>
+epick_gripper_control<span class="w"> </span>grip<span class="w"> </span>--no-wait
+epick_gripper_control<span class="w"> </span>release<span class="w"> </span>--no-wait
+
+<span class="c1"># Custom position with 5 second timeout</span>
+epick_gripper_control<span class="w"> </span>position<span class="w"> </span><span class="m">0</span>.7<span class="w"> </span>--timeout<span class="w"> </span><span class="m">5</span>.0
+
+<span class="c1"># Use different action server</span>
+epick_gripper_control<span class="w"> </span>grip<span class="w"> </span>--action-name<span class="w"> </span>/custom_gripper/gripper_cmd
+</pre></div>
+</div>
+</section>
+<section id="python-api">
+<h2>Python API<a class="headerlink" href="#python-api" title="Link to this heading"></a></h2>
+<p>You can also use the <code class="docutils literal notranslate"><span class="pre">GripperController</span></code> class directly in your Python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rclpy</span>
+<span class="kn">from</span> <span class="nn">epick_app.gripper_control</span> <span class="kn">import</span> <span class="n">GripperController</span>
+
+<span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">GripperController</span><span class="p">()</span>
+
+<span class="c1"># Grip</span>
+<span class="n">success</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">grip</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Grip successful: </span><span class="si">{</span><span class="n">success</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Release</span>
+<span class="n">success</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">release</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Release successful: </span><span class="si">{</span><span class="n">success</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Custom position</span>
+<span class="n">success</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">send_goal</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+
+<span class="n">controller</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
+<span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="gui-application">
+<h2>GUI Application<a class="headerlink" href="#gui-application" title="Link to this heading"></a></h2>
+<p>A graphical interface for controlling the gripper with buttons and visual feedback.</p>
+<section id="launch-gui">
+<h3>Launch GUI<a class="headerlink" href="#launch-gui" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epick_gripper_gui
+</pre></div>
+</div>
+<p><strong>With custom action server:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epick_gripper_gui<span class="w"> </span>--action-name<span class="w"> </span>/my_gripper/gripper_cmd
+</pre></div>
+</div>
+</section>
+<section id="gui-features">
+<h3>GUI Features<a class="headerlink" href="#gui-features" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Quick Action Buttons</strong>: Large GRIP and RELEASE buttons for immediate control</p></li>
+<li><p><strong>Custom Position Slider</strong>: Fine-grained control with slider (0.0 to 1.0)</p></li>
+<li><p><strong>Real-time Status</strong>: Live feedback showing position, effort, and goal status</p></li>
+<li><p><strong>Cancel Goal</strong>: Stop current action at any time</p></li>
+<li><p><strong>Color-coded Status</strong>: Visual feedback (orange=working, green=success, red=error)</p></li>
+</ul>
+</section>
+<section id="gui-screenshot">
+<h3>GUI Screenshot<a class="headerlink" href="#gui-screenshot" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌─────────────────────────────────────┐
+│   Epick Gripper Controller          │
+├─────────────────────────────────────┤
+│  ┌───────┐        ┌────────┐        │
+│  │ GRIP  │        │RELEASE │        │
+│  └───────┘        └────────┘        │
+│                                     │
+│  Custom Position                    │
+│  ├──────────────────────┤           │
+│  0.0 ═══●══════════ 1.0            │
+│     [Send Custom Position]          │
+│                                     │
+│     [Cancel Current Goal]           │
+│                                     │
+│  Status                             │
+│  ┌─────────────────────────────┐   │
+│  │ Position: 1.00 | Reached: ✓ │   │
+│  └─────────────────────────────┘   │
+└─────────────────────────────────────┘
+</pre></div>
+</div>
+</section>
+</section>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>ROS2 (Humble or later)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rclpy</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">control_msgs</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tkinter</span></code> (usually included with Python)</p></li>
+<li><p>Running <code class="docutils literal notranslate"><span class="pre">epick_gripper_action_controller</span></code> node</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Voettekst">
+        <a href="install.html" class="btn btn-neutral float-left" title="Installatie van de Robotiq package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Vorige</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Gerard Harkema.</p>
+  </div>
+
+  Gebouwd met <a href="https://www.sphinx-doc.org/">Sphinx</a> met een
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thema</a>
+    geleverd door <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
