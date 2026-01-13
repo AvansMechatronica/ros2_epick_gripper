@@ -3,10 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welkom de Robotiq Finger-Gripper Repository
-===========================================
+Welkom de Robotiq Vacuum-Gripper(epick) Repository
+==================================================
 
-**Welkom bij de Robotiq Gripper Repository** 
+**Welkom bij de Robotiq Vacuum-Gripper Repository** 
 
 .. note::
    This project is under active development.
