@@ -2,16 +2,6 @@
 
 Python applications for controlling the Epick gripper via ROS2 action interface, including both command-line and GUI tools.
 
-## Installation
-
-Build the package in your ROS2 workspace:
-
-```bash
-cd ~/my_ur_ws
-colcon build --packages-select epick_app
-source install/setup.bash
-```
-
 ## Usage
 
 The `epick_gripper_control` command provides a simple interface to control the gripper:

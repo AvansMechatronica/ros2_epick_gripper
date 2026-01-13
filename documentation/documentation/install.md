@@ -9,7 +9,7 @@ git clone https://github.com/RoverRobotics-forks/serial-ros2.git serial
 
 ```
 
-# Build workspace
+## Build workspace
 
 ```
 # Build the workspace
