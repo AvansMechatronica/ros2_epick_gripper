@@ -6,7 +6,7 @@
 Welkom de Robotiq Vacuum-Gripper(epick) Repository
 ==================================================
 
-**Welkom bij de Robotiq Vacuum-Gripper Repository** 
+**Welkom bij de Robotiq Vacuum-Gripper(epick) Repository** 
 
 .. note::
    This project is under active development.

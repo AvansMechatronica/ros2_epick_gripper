@@ -59,12 +59,16 @@ class GripperController(Node):
         if not wait:
             return None
 
-        # Wait for goal to complete
-        if self._goal_done_event.wait(timeout=timeout):
-            return self._goal_result.result.reached_goal if self._goal_result else False
-        else:
-            self.get_logger().error('Goal timed out!')
-            return False
+        # Wait for goal to complete while spinning to process callbacks
+        import time
+        start_time = time.time()
+        while not self._goal_done_event.is_set():
+            rclpy.spin_once(self, timeout_sec=0.1)
+            if time.time() - start_time > timeout:
+                self.get_logger().error('Goal timed out!')
+                return False
+        
+        return self._goal_result.result.reached_goal if self._goal_result else False
 
     def grip(self, wait=True, timeout=10.0):
         """
@@ -208,10 +212,6 @@ Examples:
                 wait=wait,
                 timeout=parsed_args.timeout
             )
-
-        # Spin to process callbacks
-        if wait:
-            rclpy.spin_once(controller, timeout_sec=0.1)
 
         # Exit with appropriate code
         if result is None:

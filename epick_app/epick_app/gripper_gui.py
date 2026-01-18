@@ -11,6 +11,7 @@ from rclpy.executors import MultiThreadedExecutor
 from control_msgs.action import GripperCommand
 from rclpy.action import ActionClient
 from rclpy.node import Node
+from epick_msgs.msg import ObjectDetectionStatus
 
 
 class GripperGUIController(Node):
@@ -28,6 +29,18 @@ class GripperGUIController(Node):
         self._current_goal_handle = None
         self._status_callback = None
         self._feedback_callback = None
+        self._gripper_status_callback = None
+        
+        # Subscribe to object detection status
+        self._status_subscriber = self.create_subscription(
+            ObjectDetectionStatus,
+            '/object_detection_status',
+            self._handle_gripper_status,
+            10
+        )
+        
+        # Current gripper status
+        self._current_gripper_status = None
         
         # Check server availability
         self.get_logger().info(f'Waiting for action server: {action_name}')
@@ -41,6 +54,16 @@ class GripperGUIController(Node):
     def set_feedback_callback(self, callback):
         """Set callback for action feedback."""
         self._feedback_callback = callback
+
+    def set_gripper_status_callback(self, callback):
+        """Set callback for gripper status updates."""
+        self._gripper_status_callback = callback
+
+    def _handle_gripper_status(self, msg):
+        """Handle object detection status messages."""
+        self._current_gripper_status = msg.status
+        if self._gripper_status_callback:
+            self._gripper_status_callback(msg.status)
 
     def send_goal(self, position, max_effort=0.0):
         """
@@ -155,11 +178,12 @@ class GripperGUI:
         """
         self.controller = controller
         self.controller.set_status_callback(self.update_status)
+        self.controller.set_gripper_status_callback(self.update_gripper_status)
         
         # Create main window
         self.root = Tk()
         self.root.title('Epick Gripper Control')
-        self.root.geometry('500x400')
+        self.root.geometry('550x450')
         self.root.resizable(True, True)
         
         # Status colors
@@ -263,13 +287,38 @@ class GripperGUI:
         )
         self.cancel_button.pack()
         
-        # Status display
+        # Gripper Status display
+        gripper_status_frame = Frame(self.root, relief='sunken', borderwidth=2)
+        gripper_status_frame.pack(pady=10, padx=10, fill='x')
+        
+        gripper_status_title = Label(
+            gripper_status_frame,
+            text='Gripper Status',
+            font=('Arial', 11, 'bold')
+        )
+        gripper_status_title.pack(anchor=W, padx=5, pady=(5, 2))
+        
+        self.gripper_status_text = StringVar()
+        self.gripper_status_text.set('No Status')
+        
+        self.gripper_status_label = Label(
+            gripper_status_frame,
+            textvariable=self.gripper_status_text,
+            font=('Arial', 10, 'bold'),
+            fg='#666666',
+            anchor=W,
+            justify='left',
+            height=2
+        )
+        self.gripper_status_label.pack(anchor=W, padx=5, pady=(2, 10), fill='x')
+        
+        # Action Status display
         status_frame = Frame(self.root, relief='sunken', borderwidth=2)
         status_frame.pack(pady=10, padx=10, fill='both', expand=True)
         
         status_title = Label(
             status_frame,
-            text='Status',
+            text='Action Status',
             font=('Arial', 11, 'bold')
         )
         status_title.pack(anchor=W, padx=5, pady=5)
@@ -322,6 +371,24 @@ class GripperGUI:
         # Disable cancel button if not working
         if state in ['idle', 'success', 'error']:
             self.cancel_button.config(state=DISABLED)
+
+    def update_gripper_status(self, status):
+        """
+        Update gripper status display.
+        
+        Args:
+            status: ObjectDetectionStatus value (0-3)
+        """
+        status_messages = {
+            0: ('⚪ UNKNOWN - Regulating vacuum/pressure', '#666666'),
+            1: ('🟢 OBJECT DETECTED - Min Pressure', '#008000'),
+            2: ('🟢 OBJECT DETECTED - Max Pressure', '#008000'),
+            3: ('🔴 NO OBJECT - Dropped/Timeout', '#FF0000')
+        }
+        
+        message, color = status_messages.get(status, ('Unknown status', '#666666'))
+        self.gripper_status_text.set(message)
+        self.gripper_status_label.config(fg=color)
         
     def run(self):
         """Start the GUI main loop."""
@@ -329,8 +396,12 @@ class GripperGUI:
         
     def destroy(self):
         """Destroy the GUI window."""
-        self.root.quit()
-        self.root.destroy()
+        try:
+            if self.root.winfo_exists():
+                self.root.quit()
+                self.root.destroy()
+        except Exception:
+            pass  # Window already destroyed
 
 
 def spin_ros(executor):
@@ -375,9 +446,9 @@ def main(args=None):
     finally:
         # Cleanup
         gui.destroy()
-        controller.destroy_node()
         executor.shutdown()
-        rclpy.shutdown()
+        controller.destroy_node()
+        rclpy.try_shutdown()
         sys.exit(0)
 
 

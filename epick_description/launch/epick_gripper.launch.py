@@ -57,6 +57,7 @@ def launch_setup(context, *args, **kwargs):
     description_package_param = LaunchConfiguration("description_package")
     description_file_param = LaunchConfiguration("description_file")
     controllers_config_file_param = LaunchConfiguration("controllers_file")
+    use_fake_hardware_param = LaunchConfiguration("use_fake_hardware")
 
     # Extract all parameters' values.
     description_file = PathJoinSubstitution(
@@ -69,8 +70,12 @@ def launch_setup(context, *args, **kwargs):
             controllers_config_file_param,
         ]
     ).perform(context)
+    use_fake_hardware = use_fake_hardware_param.perform(context)
 
-    robot_description_content = xacro.process_file(description_file).toxml()
+    robot_description_content = xacro.process_file(
+        description_file,
+        mappings={"use_fake_hardware": use_fake_hardware}
+    ).toxml()
 
     # The Controller Manager (CM) connects the controllers’ and hardware-abstraction
     # sides of the ros2_control framework. It also serves as the entry-point for users
@@ -149,6 +154,11 @@ def generate_launch_description():
             "controllers_file",
             default_value="controllers.yaml",
             description="YAML file with the controllers configuration.",
+        ),
+        DeclareLaunchArgument(
+            "use_fake_hardware",
+            default_value="false",
+            description="Start robot with fake hardware mirroring command to its states.",
         ),
         OpaqueFunction(function=launch_setup),
     ]
